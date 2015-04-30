@@ -1,0 +1,41 @@
+<script>
+var isIsomorphic = function(s, t) {
+	var s_len=s.length;
+	var t_len=t.length;
+    if(s_len!=t_len){
+        console.log(false);
+    	return false;
+    }else{
+    	repl(s,t);
+    }
+    function repl(ss,tt){
+        if(ss.length===0){
+            console.log(true);
+            return true;
+        }
+    	var n=-1;
+    	for(var j=0;j<s_len;j++){
+    		if(ss[j]!=="*"){
+    			n=j;
+    			break;
+    		}            
+    	}
+        if(n==-1){
+            console.log(true);
+            return true;
+        }
+    	
+    	var ex1=new RegExp(ss[n],'g');
+    	var ex2=new RegExp(tt[n],'g');
+    	var _s=ss.replace(ex1, '*');
+    	var _t=tt.replace(ex2, '*');
+    	if(_s.replace(/[\w]*/g,'_')===_t.replace(/[\w]*/g,'_')){
+    		arguments.callee(_s.replace(/\*/g,''),_t.replace(/\*/g,''));
+    	}else{
+            console.log(false);
+    		return false;
+    	}
+    }
+};
+isIsomorphic("", "");
+</script>
